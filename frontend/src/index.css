@@ -1,0 +1,36 @@
+:root {
+  /* Colors */
+  --primary: #5B5FEF;
+  --primary-dark: #4548CC;
+  --bg: #F7F8FC;
+  --sidebar-bg: #171B2E;
+  --card-bg: #FFFFFF;
+  --text-main: #20243A;
+  --text-secondary: #858BA3;
+  --success: #16A37B;
+  --warning: #E9A23B;
+  --danger: #E05260;
+  --border: #E9EAF1;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  /* Typography */
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
