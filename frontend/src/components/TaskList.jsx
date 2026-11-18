@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { updateTaskStatus } from '../services/taskService';
+import { Trash2, Edit2 } from 'lucide-react';
 
 const TaskList = ({ tasks, onDelete, onUpdate, onStatusChange }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -10,12 +11,20 @@ const TaskList = ({ tasks, onDelete, onUpdate, onStatusChange }) => {
   const filteredTasks = useMemo(() => {
     return tasks
       .filter(task => 
-        task.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        (task.title.toLowerCase().trim().includes(searchTerm.toLowerCase().trim()) ||
+         task.description?.toLowerCase().trim().includes(searchTerm.toLowerCase().trim())) &&
         (statusFilter === 'All' || task.status === statusFilter) &&
         (priorityFilter === 'All' || task.priority === priorityFilter)
       )
       .sort((a, b) => {
-        if (sortBy === 'dueDate') return new Date(a.dueDate) - new Date(b.dueDate);
+        if (sortBy === 'dueDateAsc') return new Date(a.dueDate) - new Date(b.dueDate);
+        if (sortBy === 'dueDateDesc') return new Date(b.dueDate) - new Date(a.dueDate);
+        if (sortBy === 'title') return a.title.localeCompare(b.title);
+        if (sortBy === 'priority') {
+          const priorityOrder = { 'High': 1, 'Medium': 2, 'Low': 3 };
+          return priorityOrder[a.priority] - priorityOrder[b.priority];
+        }
+        if (sortBy === 'oldest') return new Date(a.createdAt) - new Date(b.createdAt);
         return new Date(b.createdAt) - new Date(a.createdAt);
       });
   }, [tasks, searchTerm, statusFilter, priorityFilter, sortBy]);
@@ -30,7 +39,7 @@ const TaskList = ({ tasks, onDelete, onUpdate, onStatusChange }) => {
   };
 
   const getBadgeStyle = (type, value) => {
-    const base = { padding: '4px 8px', borderRadius: '6px', fontSize: '12px', fontWeight: '500' };
+    const base = { padding: '0.25rem 0.75rem', borderRadius: '999px', fontSize: '0.75rem', fontWeight: '600', border: 'none', cursor: 'pointer', transition: 'all 0.2s ease' };
     if (type === 'status') {
       if (value === 'Completed') return { ...base, background: '#DCFCE7', color: '#166534' };
       if (value === 'In Progress') return { ...base, background: '#FEF3C7', color: '#92400E' };
@@ -46,54 +55,62 @@ const TaskList = ({ tasks, onDelete, onUpdate, onStatusChange }) => {
 
   return (
     <div className="task-list-container">
-      <div className="filters" style={{ display: 'flex', gap: '12px', marginBottom: '20px' }}>
-        <input type="text" placeholder="Search tasks..." onChange={(e) => setSearchTerm(e.target.value)} style={{ padding: '8px 12px', borderRadius: '6px', border: '1px solid var(--border)', flex: 1 }} />
-        <select onChange={(e) => setStatusFilter(e.target.value)} style={{ padding: '8px', borderRadius: '6px', border: '1px solid var(--border)' }}>
+      <div style={{ display: 'flex', gap: '0.75rem', padding: '1.5rem', borderBottom: '1px solid var(--border)', flexWrap: 'wrap' }}>
+        <input type="text" placeholder="Search tasks..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} style={{ padding: '0.625rem 1rem', borderRadius: '0.75rem', border: '1px solid var(--border)', flex: 1 }} />
+        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} style={{ padding: '0.625rem 1rem', borderRadius: '0.75rem', border: '1px solid var(--color-border)', background: '#FFFFFF' }}>
           <option value="All">All Status</option>
           <option value="Pending">Pending</option>
           <option value="In Progress">In Progress</option>
           <option value="Completed">Completed</option>
         </select>
-        <select onChange={(e) => setPriorityFilter(e.target.value)} style={{ padding: '8px', borderRadius: '6px', border: '1px solid var(--border)' }}>
+        <select value={priorityFilter} onChange={(e) => setPriorityFilter(e.target.value)} style={{ padding: '0.625rem 1rem', borderRadius: '0.75rem', border: '1px solid var(--color-border)', background: '#FFFFFF' }}>
           <option value="All">All Priority</option>
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
           <option value="High">High</option>
         </select>
-        <select onChange={(e) => setSortBy(e.target.value)} style={{ padding: '8px', borderRadius: '6px', border: '1px solid var(--border)' }}>
-          <option value="createdAt">Sort by Created</option>
-          <option value="dueDate">Sort by Due Date</option>
+        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} style={{ padding: '0.625rem 1rem', borderRadius: '0.75rem', border: '1px solid var(--color-border)', background: '#FFFFFF' }}>
+          <option value="createdAt">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="dueDateAsc">Due Date (Asc)</option>
+          <option value="dueDateDesc">Due Date (Desc)</option>
+          <option value="priority">Priority</option>
+          <option value="title">Title</option>
         </select>
       </div>
-      <table className="task-table" style={{ width: '100%', borderCollapse: 'collapse' }}>
+      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
         <thead>
-          <tr style={{ borderBottom: '1px solid var(--border)', color: 'var(--muted)', fontSize: '14px' }}>
-            <th style={{ padding: '12px', textAlign: 'left' }}>Title</th>
-            <th style={{ padding: '12px', textAlign: 'left' }}>Due Date</th>
-            <th style={{ padding: '12px', textAlign: 'left' }}>Priority</th>
-            <th style={{ padding: '12px', textAlign: 'left' }}>Status</th>
-            <th style={{ padding: '12px', textAlign: 'right' }}>Actions</th>
+          <tr style={{ borderBottom: '1px solid var(--color-border)', color: 'var(--color-text-secondary)', fontSize: '0.875rem', textAlign: 'left', background: '#F0F1FA' }}>
+            <th style={{ padding: '1rem 1.5rem' }}>Task</th>
+            <th style={{ padding: '1rem 1.5rem' }}>Due Date</th>
+            <th style={{ padding: '1rem 1.5rem' }}>Priority</th>
+            <th style={{ padding: '1rem 1.5rem' }}>Status</th>
+            <th style={{ padding: '1rem 1.5rem', textAlign: 'right' }}>Actions</th>
           </tr>
         </thead>
         <tbody>
           {filteredTasks.map(task => (
-            <tr key={task._id} style={{ borderBottom: '1px solid var(--border)' }}>
-              <td style={{ padding: '16px' }}>
-                <div style={{ fontWeight: '600' }}>{task.title}</div>
-                <div style={{ fontSize: '12px', color: 'var(--muted)' }}>{task.description}</div>
+            <tr key={task._id} style={{ borderBottom: '1px solid var(--border)', transition: 'background 0.2s ease' }} onMouseEnter={(e) => e.currentTarget.style.background = '#F9FAFB'} onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}>
+              <td style={{ padding: '1rem 1.5rem' }}>
+                <div style={{ fontWeight: '600', color: 'var(--text-main)' }}>{task.title}</div>
+                <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>{task.description}</div>
               </td>
-              <td style={{ padding: '16px', fontSize: '14px' }}>{new Date(task.dueDate).toLocaleDateString()}</td>
-              <td style={{ padding: '16px' }}><span style={getBadgeStyle('priority', task.priority)}>{task.priority}</span></td>
-              <td style={{ padding: '16px' }}>
-                <select value={task.status} onChange={(e) => handleStatusChange(task._id, e.target.value)} style={getBadgeStyle('status', task.status)}>
+              <td style={{ padding: '1rem 1.5rem', fontSize: '0.875rem' }}>{task.dueDate ? new Date(task.dueDate).toLocaleDateString() : 'N/A'}</td>
+              <td style={{ padding: '1rem 1.5rem' }}><span style={getBadgeStyle('priority', task.priority)}>{task.priority}</span></td>
+              <td style={{ padding: '1rem 1.5rem' }}>
+                <select value={task.status} onChange={(e) => handleStatusChange(task._id, e.target.value)} style={{ ...getBadgeStyle('status', task.status), cursor: 'pointer', appearance: 'none' }}>
                   <option value="Pending">Pending</option>
                   <option value="In Progress">In Progress</option>
                   <option value="Completed">Completed</option>
                 </select>
               </td>
-              <td style={{ padding: '16px', textAlign: 'right' }}>
-                <button onClick={() => onUpdate(task)} style={{ background: 'none', border: 'none', color: 'var(--primary)', cursor: 'pointer', marginRight: '10px' }}>Edit</button>
-                <button onClick={() => onDelete(task._id)} style={{ background: 'none', border: 'none', color: '#EF4444', cursor: 'pointer' }}>Delete</button>
+              <td style={{ padding: '1rem 1.5rem', textAlign: 'right' }}>
+                <button type="button" onClick={() => onUpdate(task)} style={{ background: 'none', border: 'none', color: 'var(--color-primary)', cursor: 'pointer', marginRight: '0.75rem', padding: '0.5rem', borderRadius: '0.5rem' }} onMouseEnter={(e) => e.currentTarget.style.background = '#EEF2FF'} onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}>
+                  <Edit2 size={18} />
+                </button>
+                <button type="button" onClick={() => onDelete(task._id)} style={{ background: 'none', border: 'none', color: '#EF4444', cursor: 'pointer', padding: '0.5rem', borderRadius: '0.5rem' }} onMouseEnter={(e) => e.currentTarget.style.background = '#FEF2F2'} onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}>
+                  <Trash2 size={18} />
+                </button>
               </td>
             </tr>
           ))}

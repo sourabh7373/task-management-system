@@ -1,17 +1,17 @@
 :root {
-  --primary: #4F46E5;
-  --sidebar: #FFFFFF;
-  --bg: #F8FAFC;
-  --text: #1E293B;
-  --muted: #64748B;
-  --white: #FFFFFF;
-  --border: #E2E8F0;
+  --color-primary: #635BDB;
+  --color-sidebar-bg: #20243A;
+  --color-background: #F0F2FA;
+  --color-text-main: #20243A;
+  --color-text-secondary: #747991;
+  --color-card-bg: #FFFFFF;
+  --color-border: #E7E9F5;
   --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
 body {
-  background-color: var(--bg);
-  color: var(--text);
+  background-color: var(--color-background);
+  color: var(--color-text-main);
   margin: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
@@ -23,8 +23,8 @@ body {
 
 .sidebar {
   width: 250px;
-  background-color: var(--sidebar);
-  border-right: 1px solid var(--border);
+  background-color: var(--color-sidebar-bg);
+  border-right: 1px solid var(--color-border);
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -34,7 +34,7 @@ body {
 .sidebar-logo {
   font-size: 20px;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--color-primary);
   margin-bottom: 40px;
 }
 
@@ -49,36 +49,37 @@ body {
 
 .sidebar nav a {
   text-decoration: none;
-  color: var(--muted);
+  color: var(--color-text-secondary);
   font-weight: 500;
   display: block;
   padding: 10px 12px;
-  border-radius: 6px;
+  border-radius: 9px;
   transition: all 0.2s;
 }
 
 .sidebar nav a:hover {
-  background-color: #F1F5F9;
+  background-color: var(--color-primary);
+  color: #FFFFFF;
 }
 
 .sidebar nav a.active {
-  background-color: #EEF2FF;
-  color: var(--primary);
+  background-color: var(--color-primary);
+  color: #FFFFFF;
 }
 
 .sidebar-footer {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--color-border);
   padding-top: 20px;
 }
 
 .btn-secondary {
   background: none;
-  border: 1px solid var(--border);
+  border: 1px solid var(--color-border);
   padding: 8px 12px;
-  border-radius: 6px;
+  border-radius: 9px;
   cursor: pointer;
   width: 100%;
-  color: var(--muted);
+  color: var(--color-text-secondary);
 }
 
 .main-content {
@@ -106,18 +107,18 @@ body {
 }
 
 .stat-card {
-  background: var(--white);
+  background: var(--color-card-bg);
   padding: 20px;
   border-radius: 12px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--color-border);
   box-shadow: var(--shadow);
 }
 
 .btn-primary {
-  background-color: var(--primary);
+  background-color: var(--color-primary);
   color: white;
   padding: 10px 16px;
-  border-radius: 8px;
+  border-radius: 9px;
   border: none;
   cursor: pointer;
   font-weight: 500;

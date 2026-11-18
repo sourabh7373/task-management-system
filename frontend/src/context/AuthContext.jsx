@@ -10,22 +10,31 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      // Optionally validate token with backend
       setUser({ token });
     }
     setLoading(false);
   }, []);
 
   const login = async (credentials) => {
-    const { data } = await api.post('/auth/login', credentials);
-    localStorage.setItem('token', data.token);
-    setUser({ token: data.token });
+    try {
+      const { data } = await api.post('/auth/login', credentials);
+      localStorage.setItem('token', data.token);
+      setUser({ token: data.token, ...data });
+    } catch (error) {
+      console.error('Login error:', error);
+      throw error;
+    }
   };
 
   const register = async (userData) => {
-    const { data } = await api.post('/auth/register', userData);
-    localStorage.setItem('token', data.token);
-    setUser({ token: data.token });
+    try {
+      const { data } = await api.post('/auth/register', userData);
+      localStorage.setItem('token', data.token);
+      setUser({ token: data.token, ...data });
+    } catch (error) {
+      console.error('Registration error:', error);
+      throw error;
+    }
   };
 
   const logout = () => {

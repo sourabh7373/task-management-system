@@ -1,20 +1,34 @@
 :root {
-  /* Colors */
-  --primary: #5B5FEF;
-  --primary-dark: #4548CC;
-  --bg: #F7F8FC;
-  --sidebar-bg: #171B2E;
-  --card-bg: #FFFFFF;
-  --text-main: #20243A;
-  --text-secondary: #858BA3;
-  --success: #16A37B;
-  --warning: #E9A23B;
-  --danger: #E05260;
-  --border: #E9EAF1;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  /* Colors - Premium Palette */
+  --color-primary: #6558D9;
+  --color-primary-hover: #5145C4;
+  --color-primary-light: #E8E3FF;
+  --color-primary-border: #DCD9FF;
+  --color-background: #EEF2FF;
+  --color-background-secondary: #E9E7FF;
+  --color-sidebar-navy: #20243A;
+  --color-sidebar-navy-light: #30365B;
+  --color-card-bg: #FFFFFF;
+  --color-text-main: #20243A;
+  --color-text-body: #41465B;
+  --color-text-secondary: #747991;
+  --color-text-muted: #A0A4B2;
+  --color-border: #E1E5F0;
+  --color-border-strong: #D9DCE7;
+  --color-success: #20966B;
+  --color-warning: #D99A32;
+  --color-danger: #DC5151;
+  --color-danger-light: #FFF0F0;
+  --color-soft-blue: #DCEBFF;
+  --color-soft-purple: #E8E3FF;
+  --color-soft-green: #DCFCE7;
+  --color-soft-orange: #FFEDD5;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
 
   /* Typography */
-  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 * {
@@ -25,12 +39,69 @@
 
 body {
   font-family: var(--font-family);
-  background-color: var(--bg);
-  color: var(--text-main);
+  background: linear-gradient(135deg, var(--color-background) 0%, var(--color-background-secondary) 50%, var(--color-background) 100%);
+  color: var(--color-text-body);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  background-attachment: fixed;
+}
+
+#root {
+  min-height: 100vh;
 }
 
 button, input, select, textarea {
   font-family: inherit;
+}
+
+/* Utility Classes */
+.btn {
+  padding: 0.625rem 1.25rem;
+  border-radius: 9px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.btn-secondary {
+  background-color: #FFFFFF;
+  color: var(--color-text-body);
+  border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-background);
+}
+
+.btn-danger {
+  color: var(--color-danger);
+  background: none;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: var(--color-danger-light);
+}
+
+.card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
 }

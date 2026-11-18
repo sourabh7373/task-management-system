@@ -1,33 +1,49 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-
-export const Navbar = () => {
-  return null; // Navbar is now integrated into the sidebar or header
-};
+import { LayoutDashboard, ListChecks, CheckCircle, Settings, LogOut, ClipboardCheck } from 'lucide-react';
+import '../sidebar.css';
 
 export const Sidebar = () => {
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
   const location = useLocation();
+
+  const navItems = [
+    { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { path: '/tasks', label: 'My Tasks', icon: ListChecks },
+    { path: '/completed', label: 'Completed', icon: CheckCircle },
+    { path: '/settings', label: 'Settings', icon: Settings },
+  ];
 
   return (
     <aside className="sidebar">
-      <div>
-        <div className="sidebar-logo">TaskFlow</div>
-        <nav>
-          <ul>
-            <li><Link to="/dashboard" className={location.pathname === '/dashboard' ? 'active' : ''}>Dashboard</Link></li>
-            <li><Link to="/tasks" className={location.pathname === '/tasks' ? 'active' : ''}>My Tasks</Link></li>
-            <li><Link to="/completed" className={location.pathname === '/completed' ? 'active' : ''}>Completed</Link></li>
-            <li><Link to="/settings" className={location.pathname === '/settings' ? 'active' : ''}>Settings</Link></li>
-          </ul>
-        </nav>
-      </div>
-      {user && (
-        <div className="sidebar-footer">
-          <p>{user.name}</p>
-          <button onClick={logout} className="btn-secondary">Logout</button>
+      <div className="sidebar-header">
+        <div className="logo">
+          <div className="logo-icon">
+            <ClipboardCheck size={20} color="white" />
+          </div>
+          <span className="logo-text">TaskFlow</span>
         </div>
-      )}
+      </div>
+
+      <nav className="sidebar-nav">
+        {navItems.map((item) => {
+          const Icon = item.icon;
+          const isActive = location.pathname === item.path;
+          return (
+            <Link key={item.path} to={item.path} className={`nav-item ${isActive ? 'active' : ''}`}>
+              <Icon size={20} />
+              {item.label}
+            </Link>
+          );
+        })}
+      </nav>
+
+      <div className="sidebar-footer">
+        <button onClick={logout} className="logout-btn">
+          <LogOut size={20} />
+          Logout
+        </button>
+      </div>
     </aside>
   );
 };

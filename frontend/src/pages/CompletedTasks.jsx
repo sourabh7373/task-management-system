@@ -27,15 +27,15 @@ export const CompletedTasks = () => {
 
   return (
     <div className="dashboard-container">
-      <h2 style={{ fontSize: '28px', marginBottom: '32px', color: 'var(--text-main)' }}>Completed Tasks</h2>
+      <h2 style={{ fontSize: '1.5rem', marginBottom: '1.5rem', color: 'var(--color-text-main)' }}>Completed Tasks</h2>
       {loading ? (
         <p>Loading tasks...</p>
       ) : tasks.length === 0 ? (
-        <div className="card" style={{ textAlign: 'center', padding: '60px' }}>
-          <p style={{ color: 'var(--text-secondary)' }}>No completed tasks yet.</p>
+        <div className="card" style={{ textAlign: 'center', padding: '4rem' }}>
+          <p style={{ color: 'var(--color-text-secondary)' }}>No completed tasks yet.</p>
         </div>
       ) : (
-        <div className="card">
+        <div className="card" style={{ padding: 0 }}>
           <TaskList tasks={tasks} onDelete={() => {}} onUpdate={handleEdit} />
         </div>
       )}

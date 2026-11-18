@@ -1,9 +1,10 @@
+const mongoose = require('mongoose');
 const Task = require('../models/Task');
 
 const getDashboardStats = async (req, res) => {
   try {
     const stats = await Task.aggregate([
-      { $match: { user: req.user._id } },
+      { $match: { user: new mongoose.Types.ObjectId(req.user.id) } },
       {
         $group: {
           _id: '$status',

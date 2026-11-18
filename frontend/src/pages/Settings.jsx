@@ -1,16 +1,29 @@
 import { useAuth } from '../context/AuthContext';
 
 export const Settings = () => {
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
 
   return (
     <div className="dashboard-container">
-      <h2 style={{ fontSize: '28px', marginBottom: '32px', color: 'var(--text-main)' }}>Settings</h2>
-      <div className="card" style={{ padding: '32px', maxWidth: '600px' }}>
-        <h3 style={{ marginBottom: '16px' }}>Profile</h3>
-        <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>Manage your account preferences and security settings.</p>
-        <div style={{ borderTop: '1px solid var(--border)', paddingTop: '24px' }}>
-          <button onClick={logout} className="btn-primary" style={{ background: 'var(--danger)', border: 'none' }}>Logout</button>
+      <div className="page-header">
+        <h2 style={{ fontSize: '1.5rem', fontWeight: '700', color: 'var(--color-text-main)' }}>Settings</h2>
+      </div>
+      <div className="card" style={{ maxWidth: '600px', padding: '2rem' }}>
+        <h3 style={{ marginBottom: '1.5rem', fontSize: '1.125rem', fontWeight: '600', color: 'var(--color-text-main)' }}>Account Information</h3>
+        
+        <div className="form-group">
+          <label className="form-label">Name</label>
+          <input type="text" value={user?.name || ''} disabled className="form-input" style={{ background: '#FFFFFF' }} />
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">Email</label>
+          <input type="email" value={user?.email || ''} disabled className="form-input" style={{ background: '#FFFFFF' }} />
+        </div>
+
+        <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)' }}>Sign out of your account</span>
+          <button onClick={logout} className="btn btn-danger">Logout</button>
         </div>
       </div>
     </div>

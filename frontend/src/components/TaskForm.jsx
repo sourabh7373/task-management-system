@@ -49,12 +49,12 @@ export const TaskForm = () => {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) return <div className="task-form-container">Loading...</div>;
+  if (error) return <div className="task-form-container">{error}</div>;
 
   return (
     <div className="task-form-container">
-      <h2 style={{ marginBottom: '24px', color: 'var(--text-main)' }}>{id ? 'Edit Task' : 'Create New Task'}</h2>
+      <h2 className="form-title">{id ? 'Edit Task' : 'Create New Task'}</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="form-label">Title</label>
@@ -64,7 +64,7 @@ export const TaskForm = () => {
           <label className="form-label">Description</label>
           <textarea className="form-textarea" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Enter task description" rows={4} />
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+        <div className="form-row">
           <div className="form-group">
             <label className="form-label">Status</label>
             <select className="form-select" value={status} onChange={(e) => setStatus(e.target.value)}>
@@ -87,8 +87,8 @@ export const TaskForm = () => {
           <input type="date" className="form-input" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
         </div>
         <div className="form-actions">
-          <button type="button" className="btn-cancel" onClick={() => navigate('/dashboard')}>Cancel</button>
-          <button type="submit" className="btn-save">{id ? 'Update Task' : 'Create Task'}</button>
+          <button type="button" className="btn-cancel" onClick={() => navigate('/tasks')}>Cancel</button>
+          <button type="submit" className="btn-primary">{id ? 'Update Task' : 'Create Task'}</button>
         </div>
       </form>
     </div>
