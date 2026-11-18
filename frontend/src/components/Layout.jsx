@@ -31,8 +31,8 @@ export const Sidebar = () => {
           const isActive = location.pathname === item.path;
           return (
             <Link key={item.path} to={item.path} className={`nav-item ${isActive ? 'active' : ''}`}>
-              <Icon size={20} />
-              {item.label}
+              <Icon size={20} color={isActive ? 'var(--color-primary)' : '#FFFFFF'} />
+              <span style={{ color: isActive ? 'var(--color-primary)' : '#FFFFFF' }}>{item.label}</span>
             </Link>
           );
         })}
@@ -40,8 +40,8 @@ export const Sidebar = () => {
 
       <div className="sidebar-footer">
         <button onClick={logout} className="logout-btn">
-          <LogOut size={20} />
-          Logout
+          <LogOut size={20} color="#FFFFFF" />
+          <span style={{ color: '#FFFFFF' }}>Logout</span>
         </button>
       </div>
     </aside>

@@ -1,11 +1,11 @@
 :root {
-  --color-primary: #635BDB;
-  --color-sidebar-bg: #20243A;
-  --color-background: #F0F2FA;
-  --color-text-main: #20243A;
-  --color-text-secondary: #747991;
+  --color-primary: #168C8C;
+  --color-sidebar-bg: #20343C;
+  --color-background: #EAF3F1;
+  --color-text-main: #20343C;
+  --color-text-secondary: #829397;
   --color-card-bg: #FFFFFF;
-  --color-border: #E7E9F5;
+  --color-border: #DCE8E5;
   --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 

@@ -28,18 +28,18 @@ export const Login = () => {
   return (
     <div className="auth-page">
       <div className="auth-sidebar">
-        <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', fontWeight: '800' }}>TaskFlow</h1>
-        <p style={{ fontSize: '1.125rem', opacity: 0.9, lineHeight: '1.6' }}>Manage your team's tasks efficiently and stay productive with our premium interface.</p>
+        <h1 style={{ fontSize: '2.5rem', marginBottom: '16px', fontWeight: '800' }}>TaskFlow</h1>
+        <p style={{ fontSize: '1.125rem', opacity: 0.9, lineHeight: '1.6', margin: 0 }}>Manage your team's tasks efficiently and stay productive with our premium interface.</p>
       </div>
       <div className="auth-content">
         <form onSubmit={handleSubmit} className="auth-form">
-          <h2 style={{ marginBottom: '0.5rem', fontSize: '1.75rem' }}>Welcome back</h2>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>Enter your details to access your workspace.</p>
+          <h2 style={{ marginBottom: '8px', fontSize: '1.5rem', color: 'var(--color-heading)' }}>Welcome back</h2>
+          <p style={{ color: 'var(--color-text-secondary)', marginBottom: '32px' }}>Enter your details to access your workspace.</p>
           {error && <p className="error-message">{error}</p>}
           <input className="auth-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" required />
           <input className="auth-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
           <button className="auth-button" type="submit" disabled={loading}>{loading ? 'Logging in...' : 'Login'}</button>
-          <p style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Don't have an account? <Link to="/register" style={{ color: 'var(--primary)', fontWeight: '600' }}>Register</Link></p>
+          <p style={{ marginTop: '24px', textAlign: 'center', fontSize: '0.875rem', color: 'var(--color-text-secondary)' }}>Don't have an account? <Link to="/register" style={{ color: 'var(--color-primary)', fontWeight: '600' }}>Register</Link></p>
         </form>
       </div>
     </div>
@@ -77,20 +77,20 @@ export const Register = () => {
   return (
     <div className="auth-page">
       <div className="auth-sidebar">
-        <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', fontWeight: '800' }}>TaskFlow</h1>
-        <p style={{ fontSize: '1.125rem', opacity: 0.9, lineHeight: '1.6' }}>Join our community and start managing your tasks with a premium experience.</p>
+        <h1 style={{ fontSize: '2.5rem', marginBottom: '16px', fontWeight: '800' }}>TaskFlow</h1>
+        <p style={{ fontSize: '1.125rem', opacity: 0.9, lineHeight: '1.6', margin: 0 }}>Join our community and start managing your tasks with a premium experience.</p>
       </div>
       <div className="auth-content">
         <form onSubmit={handleSubmit} className="auth-form">
-          <h2 style={{ marginBottom: '0.5rem', fontSize: '1.75rem' }}>Create account</h2>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>Get started with your free account today.</p>
+          <h2 style={{ marginBottom: '8px', fontSize: '1.5rem', color: 'var(--color-heading)' }}>Create account</h2>
+          <p style={{ color: 'var(--color-text-secondary)', marginBottom: '32px' }}>Get started with your free account today.</p>
           {error && <p className="error-message">{error}</p>}
           <input className="auth-input" type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" required />
           <input className="auth-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" required />
           <input className="auth-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
           <input className="auth-input" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm password" required />
           <button className="auth-button" type="submit" disabled={loading}>{loading ? 'Registering...' : 'Register'}</button>
-          <p style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Already have an account? <Link to="/login" style={{ color: 'var(--primary)', fontWeight: '600' }}>Login</Link></p>
+          <p style={{ marginTop: '24px', textAlign: 'center', fontSize: '0.875rem', color: 'var(--color-text-secondary)' }}>Already have an account? <Link to="/login" style={{ color: 'var(--color-primary)', fontWeight: '600' }}>Login</Link></p>
         </form>
       </div>
     </div>

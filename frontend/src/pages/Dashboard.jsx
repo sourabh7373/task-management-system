@@ -5,7 +5,6 @@ import { getDashboardStats } from '../services/dashboardService';
 import StatCard from '../components/StatCard';
 import { ClipboardList, Plus, LayoutDashboard, CheckCircle, Clock } from 'lucide-react';
 import TaskList from '../components/TaskList';
-import '../dashboard.css';
 
 export const Dashboard = () => {
   const navigate = useNavigate();
@@ -39,41 +38,38 @@ export const Dashboard = () => {
   }, []);
 
   return (
-    <div className="dashboard-container">
-      <div className="dashboard-header" style={{ background: '#FFFFFF', padding: '2rem', borderRadius: '16px', marginBottom: '1rem', border: '1px solid var(--color-border)' }}>
+    <div className="dashboard">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
         <div>
-          <h2 style={{ color: 'var(--color-text-main)' }}>Welcome back!</h2>
-          <p style={{ color: 'var(--color-text-secondary)' }}>Here's what's happening with your tasks today.</p>
+          <h2 style={{ color: 'var(--color-heading)', fontSize: '1.875rem', fontWeight: '700', margin: '0 0 8px 0' }}>Dashboard</h2>
+          <p style={{ color: 'var(--color-text-secondary)', fontSize: '1rem', margin: 0 }}>Welcome back, here is your task overview.</p>
         </div>
-        <button onClick={() => navigate('/create-task')} className="btn-primary">
-          <Plus size={20} /> Create New Task
+        <button onClick={() => navigate('/create-task')} className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 24px', fontSize: '1rem' }}>
+          <Plus size={20} /> Create Task
         </button>
       </div>
 
-      <div className="stats-grid">
-        <StatCard title="Total Tasks" value={stats.totalTasks} icon={<ClipboardList size={24} />} color="blue" />
-        <StatCard title="Pending" value={stats.pendingTasks} icon={<Clock size={24} />} color="orange" />
-        <StatCard title="In Progress" value={stats.inProgressTasks} icon={<LayoutDashboard size={24} />} color="purple" />
-        <StatCard title="Completed" value={stats.completedTasks} icon={<CheckCircle size={24} />} color="green" />
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px', marginBottom: '32px' }}>
+        <StatCard title="Total Tasks" value={stats.totalTasks} icon={<ClipboardList size={20} />} color="blue" />
+        <StatCard title="Pending" value={stats.pendingTasks} icon={<Clock size={20} />} color="orange" />
+        <StatCard title="In Progress" value={stats.inProgressTasks} icon={<LayoutDashboard size={20} />} color="blue" />
+        <StatCard title="Completed" value={stats.completedTasks} icon={<CheckCircle size={20} />} color="green" />
       </div>
 
       {loading ? (
         <p>Loading dashboard...</p>
       ) : tasks.length === 0 ? (
-        <div className="card" style={{ textAlign: 'center', padding: '4rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ background: 'var(--color-primary-light)', padding: '1.5rem', borderRadius: '50%', marginBottom: '1rem', color: 'var(--color-primary)' }}>
-            <ClipboardList size={48} />
-          </div>
-          <h3 style={{ margin: '0 0 0.5rem', color: 'var(--color-text-main)' }}>Your workspace is ready!</h3>
-          <p style={{ color: 'var(--color-text-secondary)', marginBottom: '1.5rem', maxWidth: '400px' }}>You haven't created any tasks yet. Start by adding your first task and keep everything organized in one place.</p>
-          <button onClick={() => navigate('/create-task')} className="btn-primary">
-            <Plus size={20} /> Create your first task
+        <div style={{ textAlign: 'center', padding: '64px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border)', background: 'var(--color-card-bg)' }}>
+          <h3 style={{ margin: '0 0 8px', color: 'var(--color-heading)' }}>No tasks yet</h3>
+          <p style={{ color: 'var(--color-text-secondary)', marginBottom: '24px' }}>Start by adding your first task.</p>
+          <button onClick={() => navigate('/create-task')} className="btn btn-primary">
+            Create Task
           </button>
         </div>
       ) : (
-        <div className="card" style={{ padding: 0 }}>
-          <div style={{ padding: '1.5rem', borderBottom: '1px solid var(--color-border)' }}>
-            <h3 style={{ color: 'var(--color-text-main)' }}>Recent Tasks</h3>
+        <div style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border)', background: 'var(--color-card-bg)', overflow: 'hidden' }}>
+          <div style={{ padding: '24px', borderBottom: '1px solid var(--color-border)' }}>
+            <h3 style={{ color: 'var(--color-heading)', fontSize: '1.1rem', fontWeight: '600', margin: 0 }}>Recent Tasks</h3>
           </div>
           <TaskList
             tasks={tasks.slice(0, 5)}

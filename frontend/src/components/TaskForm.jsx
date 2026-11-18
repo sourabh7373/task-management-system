@@ -87,8 +87,8 @@ export const TaskForm = () => {
           <input type="date" className="form-input" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
         </div>
         <div className="form-actions">
-          <button type="button" className="btn-cancel" onClick={() => navigate('/tasks')}>Cancel</button>
-          <button type="submit" className="btn-primary">{id ? 'Update Task' : 'Create Task'}</button>
+          <button type="button" className="btn" style={{ background: 'transparent', border: '1px solid var(--color-border)', color: 'var(--color-text-secondary)' }} onClick={() => navigate('/tasks')}>Cancel</button>
+          <button type="submit" className="btn btn-primary">{id ? 'Update Task' : 'Create Task'}</button>
         </div>
       </form>
     </div>

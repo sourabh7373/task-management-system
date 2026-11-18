@@ -1,107 +1,62 @@
 :root {
-  /* Colors - Premium Palette */
-  --color-primary: #6558D9;
-  --color-primary-hover: #5145C4;
-  --color-primary-light: #E8E3FF;
-  --color-primary-border: #DCD9FF;
-  --color-background: #EEF2FF;
-  --color-background-secondary: #E9E7FF;
-  --color-sidebar-navy: #20243A;
-  --color-sidebar-navy-light: #30365B;
+  /* Palette */
+  --color-workspace: #EAF3F1;
+  --color-secondary-bg: #EFF5F4;
+  --color-sidebar: #20343C;
+  --color-sidebar-hover: #2B4850;
+  --color-primary: #168C8C;
+  --color-primary-hover: #117575;
+  --color-active-nav: #D8EFEB;
+  --color-heading: #20343C;
+  --color-text-body: #53666B;
+  --color-text-secondary: #829397;
   --color-card-bg: #FFFFFF;
-  --color-text-main: #20243A;
-  --color-text-body: #41465B;
-  --color-text-secondary: #747991;
-  --color-text-muted: #A0A4B2;
-  --color-border: #E1E5F0;
-  --color-border-strong: #D9DCE7;
-  --color-success: #20966B;
-  --color-warning: #D99A32;
-  --color-danger: #DC5151;
-  --color-danger-light: #FFF0F0;
-  --color-soft-blue: #DCEBFF;
-  --color-soft-purple: #E8E3FF;
-  --color-soft-green: #DCFCE7;
-  --color-soft-orange: #FFEDD5;
+  --color-border: #DCE8E5;
+  
+  /* Status Colors */
+  --color-pending-bg: #FFF0D9;
+  --color-pending-text: #A96816;
+  --color-progress-bg: #DCEEFF;
+  --color-progress-text: #2867A5;
+  --color-completed-bg: #DDF3E7;
+  --color-completed-text: #20764B;
+  --color-overdue-bg: #FCE4E4;
+  --color-overdue-text: #B83F3F;
+  
+  /* Shadows & Radius */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
-
-  /* Typography */
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --radius-md: 8px;
+  --radius-lg: 12px;
 }
 
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 body {
-  font-family: var(--font-family);
-  background: linear-gradient(135deg, var(--color-background) 0%, var(--color-background-secondary) 50%, var(--color-background) 100%);
+  background-color: var(--color-workspace);
   color: var(--color-text-body);
-  line-height: 1.5;
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
-  background-attachment: fixed;
-}
-
-#root {
-  min-height: 100vh;
-}
-
-button, input, select, textarea {
-  font-family: inherit;
 }
 
 /* Utility Classes */
 .btn {
-  padding: 0.625rem 1.25rem;
-  border-radius: 9px;
-  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
-  border: 1px solid transparent;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  transition: all 0.2s;
+  border: none;
 }
 
 .btn-primary {
   background-color: var(--color-primary);
-  color: #FFFFFF;
+  color: white;
 }
 
 .btn-primary:hover {
   background-color: var(--color-primary-hover);
-}
-
-.btn-secondary {
-  background-color: #FFFFFF;
-  color: var(--color-text-body);
-  border: 1px solid var(--color-border);
-}
-
-.btn-secondary:hover {
-  background-color: var(--color-background);
-}
-
-.btn-danger {
-  color: var(--color-danger);
-  background: none;
-  border: none;
-}
-
-.btn-danger:hover {
-  background-color: var(--color-danger-light);
-}
-
-.card {
-  background: var(--color-card-bg);
-  border: 1px solid var(--color-border);
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow: var(--shadow-sm);
 }
